@@ -11,3 +11,6 @@ build:
 test: build
 	$(PYTHON) $(LIB)/jo/__init__.py
 
+README.md:
+	$(PYTHON) -c 'import jo;print jo.__doc__' > README.md
+
