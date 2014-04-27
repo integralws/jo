@@ -90,7 +90,7 @@ class jo(dict):
 		return json.dumps(self, sort_keys=True)
 	
 	def __repr__(self):
-		return 'jo(%s)' % dict.__repr__(self)
+		return 'jo(%s)' % (dict.__repr__(self) if self else '')
 
 __all__ = ['jo']
 
