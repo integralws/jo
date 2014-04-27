@@ -8,8 +8,16 @@ and manipulation into item access and manipulation.
 >>> j.a
 1
 
+Reading attributes that don't exist produces None. If you need an exception
+raised, use item access instead.
+
 >>> print j.b
 None
+
+>>> j['b']
+Traceback (most recent call last):
+ ...
+KeyError: 'b'
 
 >>> j['b'] = 'b'
 >>> j.b += 'e'
@@ -49,6 +57,12 @@ As a convenience, the classmethod from_json performs the same task (and
 auto-detects whether it is loading from text or from a file)
 
 >>> print jo.from_json('{"a":1}')
+{"a": 1}
+
+>>> from StringIO import StringIO
+>>> sample = StringIO('{"a":1}')
+
+>>> print jo.from_json(sample)
 {"a": 1}
 
 
