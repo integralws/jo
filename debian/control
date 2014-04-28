@@ -1,0 +1,13 @@
+Source: python-jo
+Maintainer: Ryan Marquardt <ryan@integralws.com>
+Section: python
+Priority: optional
+Build-Depends: python-all (>= 2.6.6-3), debhelper (>= 7)
+Standards-Version: 3.9.3
+
+Package: python-jo
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}
+Description: Javascript Object
+ .
+ This package contains the jo library module
