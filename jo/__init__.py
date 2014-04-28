@@ -87,9 +87,32 @@ class jo(dict):
 			(text_or_file, **kw)
 
 	def __str__(self):
+		'''Converting a jo to string converts it to JSON
+
+		>>> str(jo())
+		'{}'
+
+		Keys are sorted
+
+		>>> str(jo(c=1, b=2, a=3))
+		'{"a": 3, "b": 2, "c": 1}'
+
+		'''
 		return json.dumps(self, sort_keys=True)
 	
 	def __repr__(self):
+		'''
+
+		>>> jo()
+		jo()
+
+		>>> jo(a=1)
+		jo({'a': 1})
+
+		>>> eval(repr(jo())) == jo() and eval(repr(jo(a=1))) == dict(a=1)
+		True
+
+		'''
 		return 'jo(%s)' % (dict.__repr__(self) if self else '')
 
 __all__ = ['jo']
