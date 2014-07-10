@@ -9,11 +9,14 @@ FULLNAME=$(shell python setup.py --fullname)
 build:
 	python setup.py build
 
-test: build
-	$(PYTHON) $(LIB)/jo/__init__.py
+test: build docs
+	$(PYTHON)2 $(LIB)/jo/__init__.py
+	$(PYTHON)3 $(LIB)/jo/__init__.py
+	$(PYTHON)2 -c 'import doctest;doctest.testfile("README.rst")'
+	$(PYTHON)3 -c 'import doctest;doctest.testfile("README.rst")'
 
-README.rst:
-	$(PYTHON) -c 'import jo;print jo.__doc__' > README.rst
+README.rst: jo/__init__.py
+	$(PYTHON)3 -c 'import jo;print (jo.__doc__)' > README.rst
 
 docs: README.rst
 
