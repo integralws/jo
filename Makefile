@@ -17,7 +17,7 @@ test: build docs
 	$(PYTHON)3 -c 'import doctest;doctest.testfile("README.rst")'
 
 README.rst: jo/__init__.py
-	$(PYTHON)3 -c 'import jo;print (jo.__doc__)' > README.rst
+	$(PYTHON)3 -c 'import jo;first,_,rest=jo.__doc__.partition("\n");print("="*len(first));print(first);print("="*len(first));print(rest)' > README.rst
 
 docs: README.rst
 
