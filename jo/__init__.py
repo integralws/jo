@@ -3,7 +3,7 @@
 '''Javascript-style Object
 
 jo is implemented as a subclass of dict, mapping attribute access
-and manipulation into item access and manipulation. 
+and manipulation into item access and manipulation.
 
 >>> from jo import jo
 >>> j = jo()
@@ -73,57 +73,60 @@ auto-detects whether it is loading from text or from a file)
 import json
 
 try:
-	basestring
+    basestring
 except NameError:
-	basestring = str
+    basestring = str
+
 
 class jo(dict):
 
-	__getattr__ = dict.get
-	__setattr__ = dict.__setitem__
-	__delattr__ = dict.__delitem__
+    __getattr__ = dict.get
+    __setattr__ = dict.__setitem__
+    __delattr__ = dict.__delitem__
 
-	__dict__ = property(lambda self:self)
-	__slots__ = ()
+    __dict__ = property(lambda self: self)
+    __slots__ = ()
 
-	@classmethod
-	def from_json(cls, text_or_file, **kw):
-		kw.setdefault('object_hook',cls)
-		return (json.loads if isinstance(text_or_file, basestring) else json.load)\
-			(text_or_file, **kw)
+    @classmethod
+    def from_json(cls, text_or_file, **kw):
+        kw.setdefault('object_hook', cls)
+        return (
+            json.loads
+            if isinstance(text_or_file, basestring) else
+            json.load
+        )(text_or_file, **kw)
 
-	def __str__(self):
-		'''Converting a jo to string converts it to JSON
+    def __str__(self):
+        '''Converting a jo to string converts it to JSON
 
-		>>> str(jo())
-		'{}'
+        >>> str(jo())
+        '{}'
 
-		Keys are sorted
+        Keys are sorted
 
-		>>> str(jo(c=1, b=2, a=3))
-		'{"a": 3, "b": 2, "c": 1}'
+        >>> str(jo(c=1, b=2, a=3))
+        '{"a": 3, "b": 2, "c": 1}'
 
-		'''
-		return json.dumps(self, sort_keys=True)
-	
-	def __repr__(self):
-		'''
+        '''
+        return json.dumps(self, sort_keys=True)
 
-		>>> jo()
-		jo()
+    def __repr__(self):
+        '''
 
-		>>> jo(a=1)
-		jo({'a': 1})
+        >>> jo()
+        jo()
 
-		>>> eval(repr(jo())) == jo() and eval(repr(jo(a=1))) == dict(a=1)
-		True
+        >>> jo(a=1)
+        jo({'a': 1})
 
-		'''
-		return 'jo(%s)' % (dict.__repr__(self) if self else '')
+        >>> eval(repr(jo())) == jo() and eval(repr(jo(a=1))) == dict(a=1)
+        True
+
+        '''
+        return 'jo(%s)' % (dict.__repr__(self) if self else '')
 
 __all__ = ['jo']
 
-if __name__=="__main__":
-	import doctest
-	doctest.testmod()
-
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

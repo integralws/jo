@@ -10,6 +10,7 @@ build:
 	python setup.py build
 
 test: build docs
+	pep8 $(LIB)/jo/__init__.py
 	$(PYTHON)2 $(LIB)/jo/__init__.py
 	$(PYTHON)3 $(LIB)/jo/__init__.py
 	$(PYTHON)2 -c 'import doctest;doctest.testfile("README.rst")'

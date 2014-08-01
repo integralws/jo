@@ -1,7 +1,7 @@
 Javascript-style Object
 
 jo is implemented as a subclass of dict, mapping attribute access
-and manipulation into item access and manipulation. 
+and manipulation into item access and manipulation.
 
 >>> from jo import jo
 >>> j = jo()
